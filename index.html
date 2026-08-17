@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>داشبورد تحلیل نمرات کنترل کیفیت</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="wrap">
+    <div class="logo">📊</div>
+    <div>
+      <h1>داشبورد تحلیل نمرات کنترل کیفیت</h1>
+      <p>استخراج و تحلیل نمرات تیم QC به تفکیک تیم، کارشناس و المان ارزیابی <span id="global-count" style="opacity:.75"></span></p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost btn-sm" id="btn-samples">بارگذاری داده نمونه</button>
+      <button class="btn btn-ghost btn-sm" id="btn-print">چاپ / PDF</button>
+      <button class="btn btn-ghost btn-sm" id="btn-reset" disabled>پاک کردن همه</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" style="max-width:1500px;margin:0 auto;">
+  <button class="tab active" data-tab="upload"   role="tab">بارگذاری فایل</button>
+  <button class="tab"        data-tab="overview" role="tab">تحلیل کلی</button>
+  <button class="tab"        data-tab="experts"  role="tab">کارشناسان</button>
+  <button class="tab"        data-tab="criteria" role="tab">المان‌های ارزیابی</button>
+  <button class="tab"        data-tab="records"  role="tab">رکوردها</button>
+</nav>
+
+<main>
+
+  <!-- فیلترها -->
+  <div class="card hidden" id="filters-card">
+    <div class="card-head"><h2>فیلترها</h2><span class="sub">نتایج همه تب‌ها بر اساس این فیلترها محاسبه می‌شود</span></div>
+    <div class="card-body"><div class="filters" id="filters"></div></div>
+  </div>
+
+  <!-- تب: بارگذاری -->
+  <section class="tab-panel" id="tab-upload" role="tabpanel">
+    <div id="upload-summary"></div>
+    <div class="section-title">تیم‌ها</div>
+    <div class="teams-grid" id="teams-grid"></div>
+
+    <div class="card mt">
+      <div class="card-head"><h2>راهنمای استفاده</h2></div>
+      <div class="card-body">
+        <ol class="tips" style="padding-inline-start:22px">
+          <li>برای هر تیم، فایل اکسل خروجی فرم کنترل کیفیت را در کارت همان تیم بارگذاری کنید (کشیدن و رها کردن یا کلیک).</li>
+          <li>ستون‌های فایل باید مانند فایل‌های نمونه باشد؛ ستون <span class="mono">tele_expert_name</span> برای تفکیک کارشناسان الزامی است.</li>
+          <li>مقدار هر معیار: <b>۱</b> رعایت شده · <b>۰</b> رعایت نشده · <b>−</b> در ارزیابی بی‌اثر (از مخرج نمره حذف می‌شود).</li>
+          <li>ثبت هر <b>رد لاین</b> نمره کل آن تماس را صفر می‌کند.</li>
+          <li>نمره نهایی هر تیم = سهم «نمره کیفی تماس» + سهم «نمره QA سیستمی» طبق سند المان‌های همان تیم.</li>
+          <li>می‌توانید چند تیم را هم‌زمان بارگذاری کنید تا در تب «تحلیل کلی» با هم مقایسه شوند.</li>
+          <li>تمام پردازش داخل مرورگر شما انجام می‌شود؛ هیچ فایلی به سرور ارسال نمی‌شود.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- تب: تحلیل کلی -->
+  <section class="tab-panel hidden" id="tab-overview" role="tabpanel"></section>
+
+  <!-- تب: کارشناسان -->
+  <section class="tab-panel hidden" id="tab-experts" role="tabpanel"></section>
+
+  <!-- تب: معیارها -->
+  <section class="tab-panel hidden" id="tab-criteria" role="tabpanel"></section>
+
+  <!-- تب: رکوردها -->
+  <section class="tab-panel hidden" id="tab-records" role="tabpanel"></section>
+
+</main>
+
+<script src="assets/vendor/xlsx.full.min.js"></script>
+<script src="assets/vendor/chart.umd.js"></script>
+<script src="assets/js/teams.js"></script>
+<script src="assets/js/analyzer.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
