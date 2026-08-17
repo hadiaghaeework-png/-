@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دانلود داشبورد کنترل کیفیت</title>
+<style>
+  @font-face { font-family: Vazirmatn; font-weight: 400; font-display: swap;
+    src: url('assets/fonts/vazirmatn-arabic-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: Vazirmatn; font-weight: 700; font-display: swap;
+    src: url('assets/fonts/vazirmatn-arabic-700-normal.woff2') format('woff2'); }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 30px 20px;
+    background: linear-gradient(140deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+    font-family: Vazirmatn, 'Segoe UI', Tahoma, sans-serif;
+    color: #0f172a; line-height: 1.85;
+  }
+  .card {
+    background: #fff; border-radius: 20px; max-width: 660px; width: 100%;
+    box-shadow: 0 25px 70px -15px rgba(0,0,0,.45); overflow: hidden;
+  }
+  .head { padding: 30px 32px 24px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+  .head .icon { font-size: 52px; line-height: 1; }
+  h1 { margin: 12px 0 6px; font-size: 21px; }
+  .head p { margin: 0; color: #64748b; font-size: 14px; }
+  .body { padding: 28px 32px 32px; }
+
+  .dl {
+    display: flex; align-items: center; gap: 16px; width: 100%;
+    background: #1d4ed8; color: #fff; border: 0; border-radius: 14px;
+    padding: 20px 24px; font-size: 16px; font-weight: 700; cursor: pointer;
+    font-family: inherit; text-decoration: none; transition: .18s;
+    box-shadow: 0 10px 28px -8px rgba(29,78,216,.65);
+  }
+  .dl:hover { background: #1e40af; transform: translateY(-2px); }
+  .dl .big { font-size: 30px; }
+  .dl .sub { font-weight: 400; font-size: 12.5px; opacity: .85; display: block; margin-top: 1px; }
+  .dl .grow { flex: 1; text-align: right; }
+
+  .alt {
+    display: flex; align-items: center; gap: 14px; width: 100%; margin-top: 12px;
+    background: #f8fafc; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 14px;
+    padding: 15px 20px; font-size: 14.5px; font-weight: 600; cursor: pointer;
+    font-family: inherit; text-decoration: none; transition: .18s;
+  }
+  .alt:hover { border-color: #1d4ed8; color: #1d4ed8; background: #eff6ff; }
+  .alt .grow { flex: 1; text-align: right; }
+  .alt .sub { font-weight: 400; font-size: 12px; color: #64748b; display: block; }
+
+  .steps { margin: 26px 0 0; padding: 0; list-style: none; }
+  .steps li {
+    display: flex; gap: 12px; padding: 11px 0; border-top: 1px solid #f1f5f9; font-size: 13.5px;
+  }
+  .steps li:first-child { border-top: 0; }
+  .steps .n {
+    flex: none; width: 25px; height: 25px; border-radius: 8px; background: #dbeafe; color: #1e3a8a;
+    display: grid; place-items: center; font-weight: 700; font-size: 12.5px;
+  }
+  .note {
+    margin-top: 22px; padding: 13px 16px; background: #ecfdf5; border: 1px solid #6ee7b7;
+    border-radius: 12px; color: #065f46; font-size: 13px;
+  }
+  code {
+    background: #f1f5f9; padding: 2px 7px; border-radius: 6px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; direction: ltr;
+    display: inline-block;
+  }
+  #status { margin-top: 14px; font-size: 13px; text-align: center; min-height: 20px; color: #059669; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="head">
+    <div class="icon">📊</div>
+    <h1>داشبورد تحلیل نمرات کنترل کیفیت</h1>
+    <p>نسخه آماده اجرا — تیم‌های BNPL و MLM</p>
+  </div>
+
+  <div class="body">
+    <a class="dl" id="btn-main" href="get" download="qc-dashboard.html">
+      <span class="big">⬇</span>
+      <span class="grow">
+        دانلود فایل داشبورد
+        <span class="sub">یک فایل HTML — حدود ۱٫۴ مگابایت — بدون نیاز به سرور یا اینترنت</span>
+      </span>
+    </a>
+
+    <a class="alt" href="qc-dashboard.html" target="_blank">
+      <span style="font-size:20px">👁</span>
+      <span class="grow">
+        اول بازش کن و ببین
+        <span class="sub">داشبورد را در یک تب جدید باز می‌کند</span>
+      </span>
+    </a>
+
+    <div id="status"></div>
+
+    <ol class="steps">
+      <li><span class="n">۱</span><span>روی دکمه آبی بالا کلیک کنید تا فایل دانلود شود.</span></li>
+      <li><span class="n">۲</span><span>در کامپیوترتان روی فایل دانلودشده <b>دابل‌کلیک</b> کنید — در مرورگر باز می‌شود.</span></li>
+      <li><span class="n">۳</span><span>برای هر تیم، فایل اکسل خروجی فرم QC را در کارت همان تیم بارگذاری کنید.</span></li>
+      <li><span class="n">۴</span><span>برای تست سریع، دکمه <b>«بارگذاری داده نمونه»</b> بالای صفحه را بزنید.</span></li>
+    </ol>
+
+    <div class="note">
+      ✔ همه چیز داخل همین یک فایل است: کتابخانه‌ها، فونت فارسی و فایل‌های نمونه.
+      بدون اینترنت کار می‌کند و می‌توانید آن را برای همکارانتان بفرستید.
+      داده‌های شما هم فقط داخل مرورگر خودتان پردازش می‌شود و جایی ارسال نمی‌شود.
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('btn-main').addEventListener('click', function () {
+  document.getElementById('status').textContent = '✔ دانلود شروع شد — پوشه Downloads را ببینید.';
+});
+</script>
+</body>
+</html>
